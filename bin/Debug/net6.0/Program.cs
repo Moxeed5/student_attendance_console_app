@@ -127,7 +127,7 @@ namespace TextWriter
                     AttendenceRecord.Late(specificStudent);
                     break;
                 case 5:
-                    Console.WriteLine("Haven't written the write file function yet");
+                        FileWriter.ExportAttendence(attendence);
                     break;
                 case 6:
                     run = true;
