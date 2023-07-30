@@ -1,0 +1,30 @@
+﻿Flow of Program
+
+Create Class Room(s)
+
+Add List of Students
+
+Add additional Students if needed
+
+View student list by classroom
+
+Take attendence by classroom.
+
+Select classroom and student to mark as late. 
+
+Print attendence records per class room. 
+
+Export attendence records for one, more, or all classrooms
+
+To make a classRoom:
+
+ReadFile or Manually add Students,
+
+if readFile: read results to dictionary
+
+create List<Student> loop through dict and create new student each loop and 
+add properties, at the end of each loop append to student list. 
+
+Call ClassRoom function and provide student list as the argument. 
+
+Modify other functions to account for dealing with a classroom now. 
