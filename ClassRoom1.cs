@@ -6,6 +6,16 @@ using System.Threading.Tasks;
 
 namespace TextWriter
 {
+    //think about adding a dependency injection container
+    //there is one included in c# .NET, Microsoft.Extensions.DependencyInjection
+
+    //double check that adding classes to school list works (school is the name of the ClassRoom obj list)
+
+    //update attendence record object to accept school list
+
+    //allow user to select class that they want to take attendence for
+
+    //then let's get this thing connected to a db
     internal class ClassRoom
     {
         private static int nextClassID = 1;
@@ -32,18 +42,21 @@ namespace TextWriter
             return room;
         }
 
-        public static ClassRoom CreateClassManually()
+        public static void CreateClassManually(List<Student> students)
         {
             ClassRoom room = new ClassRoom();
-            Student newStu = Student.createStudent();
-            room.Class.Add(newStu);
-            return room;
+            foreach (var stu in students)
+            {
+                room.Class.Add(stu);
+            }
+            
         }
 
         public static void PrintStudents(ClassRoom room)
         {
             foreach (var student in room.Class)
             {
+                Console.WriteLine($"Class ID: {room.ClassID}");
                 Console.WriteLine($"Student Name: {student.Name}");
                 Console.WriteLine($"StudentID: {student.Id}");
                 

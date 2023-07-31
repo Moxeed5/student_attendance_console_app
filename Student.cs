@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace TextWriter
 {
-    internal class Student
+    public class Student
     {
+        private static int nextStudentID = 1;
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public bool? isPresent { get; set; }
+        public Student()
+        {
+            Id = nextStudentID;
+            nextStudentID++;
+        }
 
         public static Student createStudent()
         {
@@ -27,19 +32,10 @@ namespace TextWriter
                 {
                     Console.WriteLine("Enter Student Name: ");
                     student.Name = Console.ReadLine();
+                    validInput = true;
 
                 }
                 catch (ArgumentException ex)
-                {
-                    Console.WriteLine($"{ex.Message}");
-                }
-                try
-                {
-                    Console.WriteLine("Enter Student ID: ");
-                    student.Id = int.Parse(Console.ReadLine());
-                    validInput = true;
-                }
-                catch (FormatException ex)
                 {
                     Console.WriteLine($"{ex.Message}");
                 }

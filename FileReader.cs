@@ -8,10 +8,12 @@ using System.Threading.Tasks;
     {
         public class FileReader
         {
-            public static Dictionary<int, string> ReadFile(string filePath)
+        
+        public static List<Student> ReadFile(string filePath)
             {
-                Dictionary<int, string> students = new Dictionary<int, string>();
-                int counter = 123;
+                
+                List<Student> students = new List<Student>();
+                
 
                 try
                 {
@@ -21,9 +23,13 @@ using System.Threading.Tasks;
 
                         while (line != null)
                         {
-                            students.Add(counter, line);
+                            //students.Add(counter, line);
+                            //line = reader.ReadLine();
+                            //counter += 1;
+                            Student student = new Student();
+                            student.Name = line;
+                            students.Add(student);
                             line = reader.ReadLine();
-                            counter += 1;
                         }
                     }
                 }

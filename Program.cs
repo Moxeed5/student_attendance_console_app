@@ -21,7 +21,7 @@ namespace TextWriter
             and int counter to dict. return dict. 
              */
             const string defaultPath = "C:\\Users\\Maxx705\\Documents\\TextWriter\\students.txt";
-            Dictionary<int, string> students = new Dictionary<int, string>();
+            //Dictionary<int, string> students = new Dictionary<int, string>();
 
             // Initialize list of student objects and populate with info from dict */
 
@@ -47,7 +47,7 @@ namespace TextWriter
 
             Console.WriteLine("Select from the following: ");
 
-            Console.WriteLine("Press 1 to upload a list of Student names");
+            Console.WriteLine("Press 1 to create a classroom");
 
             Console.WriteLine("Press 2 to take attendence");
 
@@ -74,55 +74,95 @@ namespace TextWriter
             switch (userInput)
             {
                 case 1:
-                    bool validInput = false;
-                    while (validInput != true)
-                    {
-                        Console.WriteLine("Press 1 to use the supplied file or 2 to use a different file");
-                        int subInput = int.Parse(Console.ReadLine());
-                        if (subInput == 1)
+                        int userChoice;
+
+                        bool validChoice = false;
+
+                        while (validChoice != true)
                         {
-                            try
-                            {
-                                students = FileReader.ReadFile(defaultPath);
-                                validInput = true;
-                            }
+                            Console.WriteLine("Add Students to your class");
+                            Console.WriteLine("Enter 1 to create a class by uploading a file, or 2 to manuall enter student for the class");
+                            string input = Console.ReadLine();
+                            int.TryParse(input, out userChoice);
 
-                            catch (IOException ex)
+                            if (userChoice == 1)
                             {
-                                Console.WriteLine($"Error reading the file: {ex.Message}");
+                                Console.WriteLine("Press 1 to use the supplied file or 2 to use a different file");
+                                int subInput = int.Parse(Console.ReadLine());
+                                if (subInput == 1)
+                                {
+                                    try
+                                    {
+                                        myStudents = FileReader.ReadFile(defaultPath);
+                                        validChoice = true;
+                                    }
+
+                                    catch (IOException ex)
+                                    {
+                                        Console.WriteLine($"Error reading the file: {ex.Message}");
+                                    }
+                                }
+                                else if (subInput == 2)
+                                {
+                                    Console.WriteLine("Enter the path to your file: ");
+                                    string customPath = Console.ReadLine();
+                                    try
+                                    {
+                                        myStudents = FileReader.ReadFile(customPath);
+                                        validChoice = true;
+                                    }
+                                    catch (IOException ex)
+                                    {
+                                        Console.WriteLine($"Error reading the file: {ex.Message}");
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Please enter a valid option of 1 or 2");
+                                }
+
+                                ClassRoom firstClass = ClassRoom.CreateClassRoom(myStudents);
+                                Console.WriteLine($"Class ID: {firstClass.ClassID}");
+                                ClassRoom.PrintStudents(firstClass);
+
+                            }
+                            else if (userChoice == 2)
+                            {
+                                bool input2 = false;
+                                while (input2 != true)
+                                {
+
+                                    Student newStudent = Student.createStudent();
+
+                                    myStudents.Add(newStudent);
+                                    
+
+                                    Console.WriteLine($"Successfully created {newStudent.Name}");
+
+                                    Console.WriteLine("Create another student? y/n");
+                                    string subInput2 = Console.ReadLine().ToUpper();
+                                    if (subInput2 == "Y")
+                                    {
+                                        input2 = false;
+                                    }
+                                    else if (subInput2 == "N")
+                                    {
+                                        input2 = true;
+                                        validChoice = true;
+                                        
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Invalid Entry, enter Y for yes or N for no");
+                                    }
+                                    
+                                }
+
+                                ClassRoom newClass = ClassRoom.CreateClassRoom(myStudents);
+                                ClassRoom.PrintStudents(newClass);
                             }
                         }
-                        else if (subInput == 2)
-                        {
-                            Console.WriteLine("Enter the path to your file: ");
-                            string customPath = Console.ReadLine();
-                            try
-                            {
-                                students = FileReader.ReadFile(customPath);
-                                validInput = true;
-                            }
-                            catch (IOException ex)
-                            {
-                                Console.WriteLine($"Error reading the file: {ex.Message}");
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Please enter a valid option of 1 or 2");
-                        }
-                            
-
-                            foreach (var item in students)
-                            {
-                                Student student = new Student();
-                                student.Id = item.Key;
-                                student.Name = item.Value;
-                                myStudents.Add(student);
-
-                            }
-
-                        }
-                    break;
+                        break;
                 case 2:
                     attendence = AttendenceRecord.TakeAttendence(myStudents);
                     break;
@@ -144,97 +184,7 @@ namespace TextWriter
                     break;
                  case 7:
 
-                        int userChoice;
-
-                        bool validChoice = false;
-
-                        while(validChoice != true)
-                        {
-                            Console.WriteLine("Would you like to upload a file or manually add students?");
-                            
-                            Console.WriteLine("Enter 1 to create a class by uploading a file, or 2 to manuall enter student for the class");
-                            string input = Console.ReadLine();
-                            int.TryParse(input, out userChoice);
-                            
-                            if(userChoice == 1)
-                            {
-                                Console.WriteLine("Press 1 to use the supplied file or 2 to use a different file");
-                                int subInput = int.Parse(Console.ReadLine());
-                                if (subInput == 1)
-                                {
-                                    try
-                                    {
-                                        students = FileReader.ReadFile(defaultPath);
-                                        validChoice = true;
-                                    }
-
-                                    catch (IOException ex)
-                                    {
-                                        Console.WriteLine($"Error reading the file: {ex.Message}");
-                                    }
-                                }
-                                else if (subInput == 2)
-                                {
-                                    Console.WriteLine("Enter the path to your file: ");
-                                    string customPath = Console.ReadLine();
-                                    try
-                                    {
-                                        students = FileReader.ReadFile(customPath);
-                                        validChoice = true;
-                                    }
-                                    catch (IOException ex)
-                                    {
-                                        Console.WriteLine($"Error reading the file: {ex.Message}");
-                                    }
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Please enter a valid option of 1 or 2");
-                                }
-
-
-                                foreach (var item in students)
-                                {
-                                    Student student = new Student();
-                                    student.Id = item.Key;
-                                    student.Name = item.Value;
-                                    myStudents.Add(student);
-
-                                }
-
-                                ClassRoom firstClass = ClassRoom.CreateClassRoom(myStudents);
-                                Console.WriteLine($"Class ID: {firstClass.ClassID}");
-                                ClassRoom.PrintStudents(firstClass);
-                            }
-                            else if(userChoice == 2)
-                            {
-                                bool input2 = false;
-                                while (input2 != true)
-                                {
-                                    
-                                    ClassRoom.CreateClassManually();
-
-                                    Console.WriteLine($"Successfully added");
-
-                                    Console.WriteLine("Create another student? y/n");
-                                    string subInput2 = Console.ReadLine().ToUpper();
-                                    if(subInput2 == "Y")
-                                    {
-                                        input2 = false;
-                                    }
-                                    else if(subInput2 == "N")
-                                    {
-                                        Console.WriteLine("Returning to main menu");
-                                        input2 = true;
-                                        validChoice = true;
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Invalid Entry, enter Y for yes or N for no");
-                                    }
-                                }
-                            }
-                        }
+                        
                         break;
 
                 case 8:

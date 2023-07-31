@@ -42,7 +42,7 @@ namespace TextWriter
                 Console.WriteLine($"Student Name: {record.Student.Name}");
                 Console.WriteLine($"StudentID: {record.Student.Id}");
                 Console.WriteLine($"Date: {record.Date} {record.dayOfWeek}");
-                Console.WriteLine($"Present: {record.Student.isPresent}");
+                Console.WriteLine($"Present: {record.isPresent}");
                 if(record.isLate ==true)
                 {
                     Console.WriteLine($"Tardy: arrvied at {DateTime.Now}");
@@ -72,13 +72,13 @@ namespace TextWriter
 
                     if (present == "Y")
                     {
-                        stu.isPresent = true;
+                        record.isPresent = true;
                         record.isLate = false;
                         validInput = true;
                     }
                     else if (present == "N")
                     {
-                        stu.isPresent = false;
+                        record.isPresent = false;
                         validInput = true;
                     }
                     else
