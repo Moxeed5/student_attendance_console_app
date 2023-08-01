@@ -91,5 +91,57 @@ namespace TextWriter
             }
                 return attendence;
         }
+
+        public static void takeClassRoomAttendence(School school)
+        {
+            Console.WriteLine("Select a class to take attendence for.");
+            int counter = 1;
+
+            foreach (var room in school.ClassRoomList)
+            {
+                
+                Console.WriteLine($"Press {counter} to take attendence for {room.ClassID}");
+                counter++;
+            }
+                int selection = int.Parse(Console.ReadLine()) - 1;
+
+                ClassRoom classOne = school.ClassRoomList[selection];
+                List<AttendenceRecord> attendence = new List<AttendenceRecord>();
+                    foreach (var stu in classOne.Class)
+                    {
+                        AttendenceRecord record = new AttendenceRecord();
+                        record.Student = stu;
+                        record.Date = DateTime.Now;
+                        record.dayOfWeek = DateTime.Today.DayOfWeek;
+
+                        Console.WriteLine(stu.Name);
+                        Console.WriteLine(stu.Id);
+
+                        bool validInput = false;
+
+                        while (validInput != true)
+                        {
+                            Console.WriteLine("Is student present? \n" +
+                            "Y/N");
+                            string present = Console.ReadLine().Trim().ToUpper();
+
+                            if (present == "Y")
+                            {
+                                record.isPresent = true;
+                                record.isLate = false;
+                                validInput = true;
+                            }
+                            else if (present == "N")
+                            {
+                                record.isPresent = false;
+                                validInput = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid input, enter Y or N");
+                            }
+                        }
+                    }                             
+        }
     }   
 }

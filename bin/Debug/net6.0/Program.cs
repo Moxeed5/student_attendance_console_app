@@ -22,7 +22,8 @@ namespace TextWriter
 
 
             
-            List<ClassRoom> school = new List<ClassRoom>();
+            //List<ClassRoom> school = new List<ClassRoom>();
+            School school = new School();
 
           
             List<AttendenceRecord> attendence = new List<AttendenceRecord>();
@@ -113,7 +114,7 @@ namespace TextWriter
                                 }
 
                                 ClassRoom firstClass = ClassRoom.CreateClassRoom(myStudents);
-                                school.Add(firstClass);
+                                school.ClassRoomList.Add(firstClass);
                                 Console.WriteLine($"Class ID: {firstClass.ClassID}");
                                 ClassRoom.PrintStudents(firstClass);
 
@@ -151,13 +152,13 @@ namespace TextWriter
                                 }
 
                                 ClassRoom newClass = ClassRoom.CreateClassRoom(myStudents);
-                                school.Add(newClass);
+                                school.ClassRoomList.Add(newClass);
                                 ClassRoom.PrintStudents(newClass);
                             }
                         }
                         break;
                 case 2:
-                    //attendence = AttendenceRecord.TakeAttendence(myStudents);
+                        AttendenceRecord.takeClassRoomAttendence(school);
                     break;
                 case 3:
                     AttendenceRecord.PrintRecords(attendence); ;

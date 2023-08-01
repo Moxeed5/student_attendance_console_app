@@ -158,7 +158,7 @@ namespace TextWriter
                         }
                         break;
                 case 2:
-                    //attendence = AttendenceRecord.TakeAttendence(myStudents);
+                        AttendenceRecord.takeClassRoomAttendence(school);
                     break;
                 case 3:
                     AttendenceRecord.PrintRecords(attendence); ;

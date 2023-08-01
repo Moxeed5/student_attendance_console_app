@@ -8,5 +8,11 @@ namespace TextWriter
 {
     internal class School
     {
+        public List<ClassRoom> ClassRoomList { get; set; }
+
+        public School()
+        {
+            ClassRoomList = new List<ClassRoom>();
+        }
     }
 }
