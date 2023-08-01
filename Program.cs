@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography.X509Certificates;
 using System.Transactions;
+using System.Net;
 
 namespace TextWriter
 {
@@ -15,27 +16,16 @@ namespace TextWriter
     {
         static void Main()
         {
-            /*use Readfile method from FileReader class to injest external 
-             document that has student names. Initialize dict and populate
-            with loop that tracks a counter int. For each iteration add string name
-            and int counter to dict. return dict. 
-             */
+            
             const string defaultPath = "C:\\Users\\Maxx705\\Documents\\TextWriter\\students.txt";
-            //Dictionary<int, string> students = new Dictionary<int, string>();
-
-            // Initialize list of student objects and populate with info from dict */
+            
 
 
-            List<Student> myStudents = new List<Student>();
+            
+            //List<ClassRoom> school = new List<ClassRoom>();
+            School school = new School();
 
-            //foreach (var item in students)
-            //{
-            //    Student student = new Student();
-            //    student.Id = item.Key;
-            //    student.Name = item.Value;
-            //    myStudents.Add(student);
-
-            //}
+          
             List<AttendenceRecord> attendence = new List<AttendenceRecord>();
 
             bool run = false;
@@ -87,12 +77,14 @@ namespace TextWriter
 
                             if (userChoice == 1)
                             {
+                                List<Student> myStudents = new List<Student>();
                                 Console.WriteLine("Press 1 to use the supplied file or 2 to use a different file");
                                 int subInput = int.Parse(Console.ReadLine());
                                 if (subInput == 1)
                                 {
                                     try
                                     {
+
                                         myStudents = FileReader.ReadFile(defaultPath);
                                         validChoice = true;
                                     }
@@ -122,18 +114,19 @@ namespace TextWriter
                                 }
 
                                 ClassRoom firstClass = ClassRoom.CreateClassRoom(myStudents);
+                                school.ClassRoomList.Add(firstClass);
                                 Console.WriteLine($"Class ID: {firstClass.ClassID}");
                                 ClassRoom.PrintStudents(firstClass);
 
                             }
                             else if (userChoice == 2)
                             {
+                                List<Student> myStudents = new List<Student>();
                                 bool input2 = false;
                                 while (input2 != true)
                                 {
 
                                     Student newStudent = Student.createStudent();
-
                                     myStudents.Add(newStudent);
                                     
 
@@ -159,12 +152,13 @@ namespace TextWriter
                                 }
 
                                 ClassRoom newClass = ClassRoom.CreateClassRoom(myStudents);
+                                school.ClassRoomList.Add(newClass);
                                 ClassRoom.PrintStudents(newClass);
                             }
                         }
                         break;
                 case 2:
-                    attendence = AttendenceRecord.TakeAttendence(myStudents);
+                    //attendence = AttendenceRecord.TakeAttendence(myStudents);
                     break;
                 case 3:
                     AttendenceRecord.PrintRecords(attendence); ;
