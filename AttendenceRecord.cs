@@ -17,15 +17,7 @@ namespace TextWriter
 
         public bool? isLate { get; set; }
 
-        //public static AttendenceRecord FindStudentAttendence(Student student)
-        //{
-        //    Console.WriteLine("Enter the name of the student to mark as late: ");
-        //    string name = Console.ReadLine();
-
-        //    AttendenceRecord specificStudentRecord = records.FirstOrDefault(record => record.Student.Name == name);
-
-        //    return specificStudentRecord;
-        //}
+        
         public static void Late(School school)
         {
             Console.WriteLine("Enter student to mark late: ");

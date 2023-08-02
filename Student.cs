@@ -43,8 +43,50 @@ namespace TextWriter
                 {
                     Console.WriteLine($"{ex.Message}");
                 }
+
             }
             return student;
+        }
+
+        public static void addOneOffStudent(School school)
+        {
+            Student student = new Student();
+
+            Console.WriteLine("Create Student");
+
+
+            bool validInput = false;
+            while (validInput != true)
+            {
+                try
+                {
+                    Console.WriteLine("Enter Student Name: ");
+                    student.Name = Console.ReadLine();
+                    validInput = true;
+
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine($"{ex.Message}");
+                }
+                try
+                {
+                    Console.WriteLine("Enter a Class ID for the class that you want to add the student to: ");
+                    int assignedClass = int.Parse(Console.ReadLine());
+                    foreach (var room in school.ClassRoomList)
+                    {
+                        if (assignedClass == room.ClassID)
+                        {
+                            room.Class.Add(student);
+                        }
+                    }
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine($"{ex.Message}");
+                }
+            }
+
         }
     }
 }

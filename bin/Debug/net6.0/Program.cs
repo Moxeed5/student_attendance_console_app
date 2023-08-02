@@ -166,15 +166,13 @@ namespace TextWriter
                     case 4:
                         AttendenceRecord.Late(school);
                         break;
-                    //case 5:
-                    //    FileWriter.ExportAttendence(attendence);
-                    //    break;
-                    //case 6:
-                    //    Student stu = Student.createStudent();
-                    //    AttendenceRecord record = new AttendenceRecord();
-                    //    record.Student = stu;
+                    case 5:
+                        FileWriter.ExportAttendence(school);
+                        break;
+                    case 6:
+                        Student.addOneOffStudent(school);
 
-                    //    break;
+                        break;
                     case 7:
 
                         
