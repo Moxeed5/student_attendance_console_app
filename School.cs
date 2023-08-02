@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextWriter
 {
-    internal class School
+    public class School
     {
         public List<ClassRoom> ClassRoomList { get; set; }
 

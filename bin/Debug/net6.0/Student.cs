@@ -8,7 +8,10 @@ namespace TextWriter
 {
     public class Student
     {
+        
         private static int nextStudentID = 1;
+
+        public AttendenceRecord Record { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
 
@@ -16,6 +19,7 @@ namespace TextWriter
         {
             Id = nextStudentID;
             nextStudentID++;
+            Record = new AttendenceRecord();
         }
 
         public static Student createStudent()

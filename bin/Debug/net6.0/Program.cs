@@ -161,22 +161,21 @@ namespace TextWriter
                         AttendenceRecord.takeClassRoomAttendence(school);
                     break;
                 case 3:
-                    AttendenceRecord.PrintRecords(attendence); ;
+                    AttendenceRecord.PrintRecords(school); 
                     break;
-                case 4:
-                    AttendenceRecord specificStudent = AttendenceRecord.FindStudent(attendence);
-                    AttendenceRecord.Late(specificStudent);
-                    break;
-                case 5:
-                    FileWriter.ExportAttendence(attendence);
-                    break;
-                case 6:
-                    Student stu = Student.createStudent();
-                    AttendenceRecord record = new AttendenceRecord();
-                    record.Student = stu;
+                    case 4:
+                        AttendenceRecord.Late(school);
+                        break;
+                    //case 5:
+                    //    FileWriter.ExportAttendence(attendence);
+                    //    break;
+                    //case 6:
+                    //    Student stu = Student.createStudent();
+                    //    AttendenceRecord record = new AttendenceRecord();
+                    //    record.Student = stu;
 
-                    break;
-                 case 7:
+                    //    break;
+                    case 7:
 
                         
                         break;

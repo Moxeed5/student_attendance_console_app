@@ -16,7 +16,7 @@ namespace TextWriter
     //allow user to select class that they want to take attendence for
 
     //then let's get this thing connected to a db
-    internal class ClassRoom
+    public class ClassRoom
     {
         private static int nextClassID = 1;
         public int ClassID { get; set; }
