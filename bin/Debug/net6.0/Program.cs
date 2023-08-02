@@ -19,10 +19,6 @@ namespace TextWriter
             
             const string defaultPath = "C:\\Users\\Maxx705\\Documents\\TextWriter\\students.txt";
             
-
-
-            
-            //List<ClassRoom> school = new List<ClassRoom>();
             School school = new School();
 
           
@@ -33,7 +29,7 @@ namespace TextWriter
             while (run != true) 
             { 
                 
-                Console.WriteLine("Welcome to Class Manager");
+            Console.WriteLine("Welcome to Class Manager");
 
             Console.WriteLine("Select from the following: ");
 
@@ -51,17 +47,31 @@ namespace TextWriter
 
             Console.WriteLine("Press 6 create a new student");
 
-            Console.WriteLine("Press 7 to create a new class");
+            Console.WriteLine("Press 7 to exit the program");
 
-            Console.WriteLine("Press 9 to exit the program");
 
-            //add method in Student class to manually add a student
 
-            
+                bool validInput = false;
+                int userInput = 0;
 
-            int userInput = int.Parse(Console.ReadLine());
+                while (!validInput)
+                {
+                    Console.WriteLine("Enter your choice:");
+                    string input = Console.ReadLine();
 
-            switch (userInput)
+                    if (int.TryParse(input, out userInput))
+                    {
+                        validInput = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input. Please enter a valid number.");
+                    }
+                }
+
+
+
+                switch (userInput)
             {
                 case 1:
                         int userChoice;
@@ -77,15 +87,21 @@ namespace TextWriter
 
                             if (userChoice == 1)
                             {
+                                int subInput;
                                 List<Student> myStudents = new List<Student>();
                                 Console.WriteLine("Press 1 to use the supplied file or 2 to use a different file");
-                                int subInput = int.Parse(Console.ReadLine());
+                                string choice = Console.ReadLine();
+                                int.TryParse(choice, out subInput);
                                 if (subInput == 1)
                                 {
                                     try
                                     {
 
                                         myStudents = FileReader.ReadFile(defaultPath);
+                                        ClassRoom firstClass = ClassRoom.CreateClassRoom(myStudents);
+                                        school.ClassRoomList.Add(firstClass);
+                                        Console.WriteLine($"Class ID: {firstClass.ClassID}");
+                                        ClassRoom.PrintStudents(firstClass);
                                         validChoice = true;
                                     }
 
@@ -101,6 +117,10 @@ namespace TextWriter
                                     try
                                     {
                                         myStudents = FileReader.ReadFile(customPath);
+                                        ClassRoom firstClass = ClassRoom.CreateClassRoom(myStudents);
+                                        school.ClassRoomList.Add(firstClass);
+                                        Console.WriteLine($"Class ID: {firstClass.ClassID}");
+                                        ClassRoom.PrintStudents(firstClass);
                                         validChoice = true;
                                     }
                                     catch (IOException ex)
@@ -113,48 +133,51 @@ namespace TextWriter
                                     Console.WriteLine("Please enter a valid option of 1 or 2");
                                 }
 
-                                ClassRoom firstClass = ClassRoom.CreateClassRoom(myStudents);
-                                school.ClassRoomList.Add(firstClass);
-                                Console.WriteLine($"Class ID: {firstClass.ClassID}");
-                                ClassRoom.PrintStudents(firstClass);
+                                //ClassRoom firstClass = ClassRoom.CreateClassRoom(myStudents);
+                                //school.ClassRoomList.Add(firstClass);
+                                //Console.WriteLine($"Class ID: {firstClass.ClassID}");
+                                //ClassRoom.PrintStudents(firstClass);
 
                             }
                             else if (userChoice == 2)
                             {
                                 List<Student> myStudents = new List<Student>();
-                                bool input2 = false;
-                                while (input2 != true)
-                                {
 
+                                bool input2 = false;
+                                while (!input2)
+                                {
                                     Student newStudent = Student.createStudent();
                                     myStudents.Add(newStudent);
-                                    
 
                                     Console.WriteLine($"Successfully created {newStudent.Name}");
 
-                                    Console.WriteLine("Create another student? y/n");
-                                    string subInput2 = Console.ReadLine().ToUpper();
-                                    if (subInput2 == "Y")
+                                    bool validOption = false;
+                                    while (!validOption)
                                     {
-                                        input2 = false;
+                                        Console.WriteLine("Create another student? Y/N");
+                                        string subInput2 = Console.ReadLine().ToUpper();
+                                        if (subInput2 == "Y")
+                                        {
+                                            validOption = true;
+                                        }
+                                        else if (subInput2 == "N")
+                                        {
+                                            validOption = true;
+                                            input2 = true;
+                                            validChoice = true;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Invalid Entry, enter Y for yes or N for no");
+                                        }
                                     }
-                                    else if (subInput2 == "N")
-                                    {
-                                        input2 = true;
-                                        validChoice = true;
-                                        
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Invalid Entry, enter Y for yes or N for no");
-                                    }
-                                    
                                 }
 
                                 ClassRoom newClass = ClassRoom.CreateClassRoom(myStudents);
                                 school.ClassRoomList.Add(newClass);
                                 ClassRoom.PrintStudents(newClass);
                             }
+
                         }
                         break;
                 case 2:
@@ -174,40 +197,14 @@ namespace TextWriter
 
                         break;
                     case 7:
-
-                        
-                        break;
-
-                case 8:
-                        
-                        break;
-                    case 9:
                         run = true;
                         break;
 
-                }
-        }
+            }
+
+            }
 
         }
-
-
-
-
-
-
-
-
-            //List<AttendenceRecord> attendence; //= AttendenceRecord.TakeAttendence(myStudents);
-            
-            //AttendenceRecord.PrintRecords(attendence);
-
-
-            //AttendenceRecord specificStudent = AttendenceRecord.FindStudent(attendence);
-
-            //AttendenceRecord.Late(specificStudent);
-
-
-
         
     }
 }

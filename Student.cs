@@ -28,25 +28,47 @@ namespace TextWriter
 
             Console.WriteLine("Create Student");
 
-            
             bool validInput = false;
-            while (validInput != true)
+            while (!validInput)
             {
                 try
                 {
                     Console.WriteLine("Enter Student Name: ");
-                    student.Name = Console.ReadLine();
-                    validInput = true;
+                    string name = Console.ReadLine();
 
+                    if (IsValidName(name))
+                    {
+                        student.Name = name;
+                        validInput = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid student name. Please enter a name containing only letters.");
+                    }
                 }
                 catch (ArgumentException ex)
                 {
                     Console.WriteLine($"{ex.Message}");
                 }
-
             }
+
             return student;
         }
+
+        // Helper method to validate student name
+        private static bool IsValidName(string name)
+        {
+            foreach (char letter in name)
+            {
+                if (!char.IsLetter(letter))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+
 
         public static void addOneOffStudent(School school)
         {
